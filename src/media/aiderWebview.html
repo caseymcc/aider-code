@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Aider Webview</title>
+    <link rel="stylesheet" type="text/css" href="${cssUri}">
+    <script src="${markdownItUri}"></script>
+</head>
+<body class="vscode-body">
+    <div id="app">
+        <div class="container">
+            <div class="header">
+                <div class="logo"></div>
+                <h1>Aider</h1><span id="version-text" class="version-text"></span>
+                <div class="model-info">
+                    <div id="model-text" class="model-text"></div>
+                    <div id="weak-model-text" class="model-text"></div>
+                </div>
+                <button id="debug-toggle" class="debug-icon codicon codicon-bug">🐛</button>
+            </div>
+            <div id="chat-history"></div>
+            <div id="input" class="input-container">
+                <div id="user-input-area" class="input-wrapper">
+                    <textarea id="user-input" class="vscode-input" placeholder="Type your message here..."></textarea>
+                </div>
+                <button id="send-button" class="vscode-button">Send</button>
+            </div>
+        </div>
+        <div id="debug-view" class="debug-view hidden">
+            <h2>Debug Log</h2>
+            <div id="debug-log"></div>
+        </div>
+    </div>
+    <script src="${scriptUri}"></script>
+</body>
+</html>

@@ -1,0 +1,365 @@
+<!DOCTYPE html>
+
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Aider Webview</title>
+
+        <style>
+            @font-face {
+                font-family: 'sourcesanspro';
+                font-style: normal;
+                font-weight: 400;
+                font-display: block;
+                src: url(https://design.penpot.app/fonts/sourcesanspro-regular.woff) format('woff');
+            }
+            
+            html, body {
+            margin: 0;
+            min-height: 100%;
+            min-width: 100%;
+            padding: 0;
+            }
+            
+            body {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            width: 100vw;
+            min-height: 100vh;
+            }
+            
+            * {
+            box-sizing: border-box;
+            }
+            
+            .text-node { background-clip: text !important; -webkit-background-clip: text !important; }
+            
+            /* Board */
+            .board-d54606e3eca5 {
+            position: relative;
+            width: 100%;
+            background: #000000;
+            overflow: hidden;
+            display: flex;
+            align-items: start;
+            align-content: stretch;
+            justify-items: start;
+            justify-content: start;
+            z-index: 0;
+            flex-direction: row;
+            flex-wrap: nowrap;
+            flex-grow: 1;
+            grid-template-rows: 1fr 1fr;
+            grid-template-columns: 1fr 1fr;
+            min-height: 1122px;
+            }
+            
+            /* tool-bar */
+            .toolbar-d5478a8950ac {
+            position: relative;
+            width: 30px;
+            height: 1122px;
+            background: #505050;
+            border-radius: 0px;
+            overflow: hidden;
+            display: flex;
+            align-items: start;
+            align-content: stretch;
+            justify-content: start;
+            gap: 2px;
+            padding: 2px 2px 2px 2px;
+            flex-direction: column;
+            flex-wrap: nowrap;
+            flex-shrink: 0;
+            }
+            
+            /* Rectangle */
+            .rectangle-d547b97708ae {
+            width: 26px;
+            height: 26px;
+            background: #B1B2B5;
+            border-radius: 0px;
+            flex-shrink: 0;
+            }
+            
+            /* Rectangle */
+            .rectangle-d54d0733a3ad {
+            width: 26px;
+            height: 26px;
+            background: #B1B2B5;
+            border-radius: 0px;
+            flex-shrink: 0;
+            }
+            
+            /* Rectangle */
+            .rectangle-d54d07fba7fc {
+            width: 26px;
+            height: 26px;
+            background: #B1B2B5;
+            border-radius: 0px;
+            flex-shrink: 0;
+            }
+            
+            /* Rectangle */
+            .rectangle-d54d086346a1 {
+            width: 26px;
+            height: 26px;
+            background: #B1B2B5;
+            border-radius: 0px;
+            flex-shrink: 0;
+            }
+            
+            /* Rectangle */
+            .rectangle-d54d08b17528 {
+            width: 26px;
+            height: 26px;
+            background: #B1B2B5;
+            border-radius: 0px;
+            flex-shrink: 0;
+            }
+            
+            /* Rectangle */
+            .rectangle-d54d08f40782 {
+            width: 26px;
+            height: 26px;
+            background: #B1B2B5;
+            border-radius: 0px;
+            flex-shrink: 0;
+            }
+            
+            /* tool-view */
+            .toolview-d547447e56af {
+            position: relative;
+            width: auto;
+            height: auto;
+            background: #141414;
+            overflow: hidden;
+            display: flex;
+            align-items: start;
+            align-content: stretch;
+            justify-content: start;
+            flex-direction: column;
+            flex-wrap: nowrap;
+            min-height: 1122px;
+            min-width: 708px;
+            }
+            
+            /* Board */
+            .board-d54e0220799c {
+            position: relative;
+            width: 708px;
+            height: 100px;
+            display: flex;
+            align-items: start;
+            align-content: stretch;
+            justify-content: start;
+            flex-direction: row;
+            flex-wrap: nowrap;
+            flex-shrink: 0;
+            }
+            
+            /* Rectangle */
+            .rectangle-d54e1b3e9d12 {
+            width: 100px;
+            height: 50px;
+            background: #0031C6;
+            border-radius: 0px;
+            flex-shrink: 0;
+            align-self: center;
+            }
+            
+            /* Rectangle */
+            .rectangle-d54df0a20d3e {
+            width: 504px;
+            height: 100%;
+            background: #B1B2B5;
+            border-radius: 0px;
+            flex-shrink: 0;
+            }
+            
+            /* Label */
+            .label-d54f2c448520 {
+            width: 104px;
+            height: 24px;
+            flex-shrink: 0;
+            }
+            .label-d54f2c448520 .root-0 {
+            
+            
+            display: flex;
+            white-space: break-spaces;
+            align-items: flex-start;
+            }
+            .label-d54f2c448520 .root-0-paragraph-set-0 {
+            display: inline-flex;
+            flex-direction: column;
+            justify-content: inherit;
+            min-width: 100%;
+            margin-right: 1px;
+            vertical-align: top;
+            }
+            .label-d54f2c448520 .root-0-paragraph-set-0-paragraph-0 {
+            font-size: 0;
+            line-height: 1.2;
+            margin: 0;
+            text-align: left;
+            }
+            .label-d54f2c448520 .root-0-paragraph-set-0-paragraph-0-text-0 {
+            color: rgba(0, 0, 0, 1);
+            text-transform: none;
+            
+            line-break: auto;
+            overflow-wrap: initial;
+            white-space: break-spaces;
+            text-rendering: geometricPrecision;
+            caret-color: rgba(0, 0, 0, 1);
+            text-decoration: none;
+            letter-spacing: 0px;
+            font-size: 14px;
+            font-family: "sourcesanspro";
+            font-style: normal;
+            font-weight: 400;
+            }
+            
+            /* Rectangle */
+            .rectangle-d548c44a02f7 {
+            width: 100%;
+            height: 1005.11px;
+            background: #141414;
+            border-radius: 0px;
+            flex-shrink: 0;
+            }
+            
+            /* title-bar */
+            .titlebar-d5498db246e3 {
+            position: relative;
+            width: 100%;
+            height: 17px;
+            background: #B1B2B5;
+            border-radius: 0px;
+            display: flex;
+            align-items: start;
+            align-content: stretch;
+            justify-content: start;
+            gap: 5px;
+            padding: 0px 5px 0px 5px;
+            flex-direction: row;
+            flex-wrap: nowrap;
+            }
+            
+            /* Aider Chat */
+            .aider-chat-d548ef9c5b7f {
+            width: 698px;
+            height: 17px;
+            flex-shrink: 0;
+            }
+            .aider-chat-d548ef9c5b7f .root-0 {
+            
+            
+            display: flex;
+            white-space: break-spaces;
+            align-items: flex-start;
+            }
+            .aider-chat-d548ef9c5b7f .root-0-paragraph-set-0 {
+            display: inline-flex;
+            flex-direction: column;
+            justify-content: inherit;
+            min-width: 100%;
+            margin-right: 1px;
+            vertical-align: top;
+            }
+            .aider-chat-d548ef9c5b7f .root-0-paragraph-set-0-paragraph-0 {
+            font-size: 0;
+            line-height: 1.2;
+            margin: 0;
+            text-align: left;
+            }
+            .aider-chat-d548ef9c5b7f .root-0-paragraph-set-0-paragraph-0-text-0 {
+            color: rgba(0, 0, 0, 1);
+            text-transform: none;
+            
+            line-break: auto;
+            overflow-wrap: initial;
+            white-space: break-spaces;
+            text-rendering: geometricPrecision;
+            caret-color: rgba(0, 0, 0, 1);
+            text-decoration: none;
+            letter-spacing: 0px;
+            font-size: 14px;
+            font-family: "sourcesanspro";
+            font-style: normal;
+            font-weight: 400;
+            }
+        </style>
+    </head>
+
+<body>
+
+<!-- frame: Board -->
+<div class="frame board-d54606e3eca5">
+    <!-- frame: tool-view -->
+    <div class="frame toolview-d547447e56af">
+      <!-- frame: title-bar -->
+      <div class="frame titlebar-d5498db246e3">
+        <!-- text: Aider Chat -->
+        <div class="shape text aider-chat-d548ef9c5b7f">
+          <div class="text-node-html" id="html-text-node-6db540bb-9bc1-808d-8004-d548ef9c5b7f" data-x="-99.9999978831296" data-y="-132.00008942580843">
+            <div class="root rich-text root-0" style="display:flex;white-space:break-spaces;align-items:flex-start" xmlns="http://www.w3.org/1999/xhtml">
+              <div class="paragraph-set root-0-paragraph-set-0">
+                <p class="paragraph root-0-paragraph-set-0-paragraph-0" dir="auto"><span class="text-node root-0-paragraph-set-0-paragraph-0-text-0" style="color:rgba(0, 0, 0, 1);text-transform:none;line-break:auto;overflow-wrap:initial;white-space:break-spaces;text-rendering:geometricPrecision;caret-color:rgba(0, 0, 0, 1);text-decoration:none;--font-id:sourcesanspro;--fills:[[&quot;^ &quot;,&quot;~:fill-color&quot;,&quot;#000000&quot;,&quot;~:fill-opacity&quot;,1]];letter-spacing:0px;font-size:14px;font-family:&quot;sourcesanspro&quot;;font-style:normal;font-weight:400">Aider Chat</span></p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <!-- rect: Rectangle -->
+      <div class="shape rect rectangle-d548c44a02f7">
+      </div>
+      <!-- frame: Board -->
+      <div class="frame board-d54e0220799c">
+        <!-- text: Label -->
+        <div class="shape text label-d54f2c448520">
+          <div class="text-node-html" id="html-text-node-6db540bb-9bc1-808d-8004-d54f2c448520" data-x="-105" data-y="890">
+            <div class="root rich-text root-0" style="display:flex;white-space:break-spaces;align-items:flex-start" xmlns="http://www.w3.org/1999/xhtml">
+              <div class="paragraph-set root-0-paragraph-set-0">
+                <p class="paragraph root-0-paragraph-set-0-paragraph-0" dir="auto"><span class="text-node root-0-paragraph-set-0-paragraph-0-text-0" style="color:rgba(0, 0, 0, 1);text-transform:none;line-break:auto;overflow-wrap:initial;white-space:break-spaces;text-rendering:geometricPrecision;caret-color:rgba(0, 0, 0, 1);text-decoration:none;--font-id:sourcesanspro;--fills:[[&quot;^ &quot;,&quot;~:fill-color&quot;,&quot;#000000&quot;,&quot;~:fill-opacity&quot;,1]];letter-spacing:0px;font-size:14px;font-family:&quot;sourcesanspro&quot;;font-style:normal;font-weight:400">Label</span></p>
+              </div>
+            </div>
+          </div>
+        </div>
+        <!-- rect: Rectangle -->
+        <div class="shape rect rectangle-d54df0a20d3e">
+        </div>
+        <!-- rect: Rectangle -->
+        <div class="shape rect rectangle-d54e1b3e9d12">
+        </div>
+      </div>
+    </div>
+    <!-- frame: tool-bar -->
+    <div class="frame toolbar-d5478a8950ac">
+      <!-- rect: Rectangle -->
+      <div class="shape rect rectangle-d54d08f40782">
+      </div>
+      <!-- rect: Rectangle -->
+      <div class="shape rect rectangle-d54d08b17528">
+      </div>
+      <!-- rect: Rectangle -->
+      <div class="shape rect rectangle-d54d086346a1">
+      </div>
+      <!-- rect: Rectangle -->
+      <div class="shape rect rectangle-d54d07fba7fc">
+      </div>
+      <!-- rect: Rectangle -->
+      <div class="shape rect rectangle-d54d0733a3ad">
+      </div>
+      <!-- rect: Rectangle -->
+      <div class="shape rect rectangle-d547b97708ae">
+      </div>
+    </div>
+  </div>
+
+  </body>
+
+  </html>
