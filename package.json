@@ -6,22 +6,83 @@
   "engines": {
     "vscode": "^1.90.0"
   },
+  "publisher": "krazer",
   "categories": [
-    "Other"
+    "AI"
   ],
-  "activationEvents": [],
+  "keywords": [
+    "aider",
+    "ai",
+    "chat",
+    "assistant"
+  ],
+  "activationEvents": [
+    "onStartupFinished",
+    "onView:fileExplorer"
+  ],
   "main": "./out/extension.js",
   "contributes": {
     "commands": [
       {
-        "command": "aider-code.helloWorld",
-        "title": "Hello World"
+        "command": "aider-code.openChat",
+        "title": "aider-code: Open Chat"
       },
       {
-        "command": "aider-code.openAiderChat",
-        "title": "Open Aider Chat"
+        "command": "aider-code.toggleFileDecorator",
+        "title": "aider-code: Toggle File Decoration"
+      },
+      {
+        "command": "aider-code.explorer-context-menu.add",
+        "title": "aider-code: add"
+      },
+      {
+        "command": "aider-code.explorer-context-menu.addReadOnly",
+        "title": "aider-code: add read-only"
+      },
+      {
+        "command": "aider-code.explorer-context-menu.remove",
+        "title": "aider-code: remove"
       }
-    ]
+    ],
+    "menus": {
+      "editor/context": [
+        {
+            "submenu": "aider-code.contextMenu",
+            "group": "aider-code"
+        }
+      ],
+      "commandPalette": [
+        {
+          "command": "aider-code.explorer-context-menu.add",
+          "when": "false"
+        },
+        {
+          "command": "aider-code.explorer-context-menu.addReadOnly",
+          "when": "false"
+        },
+        {
+          "command": "aider-code.explorer-context-menu.remove",
+          "when": "false"
+        }
+      ],
+      "explorer/context": [
+        {
+          "when": "resourceScheme == file",
+          "command": "aider-code.explorer-context-menu.add",
+          "group": "aider-code@1"
+        },
+        {
+          "when": "resourceScheme == file",
+          "command": "aider-code.explorer-context-menu.addReadOnly",
+          "group": "aider-code@2"
+        },
+        {
+          "when": "resourceScheme == file",
+          "command": "aider-code.explorer-context-menu.remove",
+          "group": "aider-code@3"
+        }
+      ]
+    }
   },
   "scripts": {
     "vscode:prepublish": "npm run compile",

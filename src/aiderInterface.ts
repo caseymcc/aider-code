@@ -75,7 +75,7 @@ export class AiderInterface
             ["auto_complete", this.handleAutoComplete.bind(this)],
             ["tokens", this.handleTokens.bind(this)],
             ["prompt", this.handlePrompt.bind(this)],
-
+            ["files", this.handleFiles.bind(this)],
         ]);
     }
 
@@ -124,6 +124,10 @@ export class AiderInterface
         this.app.addPrompt({message:parsedData.value, defaultValue:parsedData.default, subject:parsedData.subject});
     }
 
+    private handleFiles(parsedData: any): void
+    {
+        this.app.updateFileList(parsedData.value);
+    }
 //    public handleInteractiveInput(text: string): void
 //    {
 //        this.sendCommand("interactive", text);

@@ -14,6 +14,12 @@ let streamMessage;
 
 document.addEventListener('DOMContentLoaded', () => 
 {
+    // Add scroll event listener to chat history
+    const chatHistory = document.getElementById('chat-history');
+    chatHistory.addEventListener('scroll', () => {
+        isScrolledToBottom = checkIfScrolledToBottom();
+    });
+
     // Initialize markdown-it using the global markdownit function
     const md = window.markdownit(
         {
@@ -79,10 +85,28 @@ function updateMessageBlock(type)
     chatHistory.appendChild(currentMessageDiv);
 }
 
+let isScrolledToBottom = true;
+
+// Check if chat history is scrolled to bottom
+function checkIfScrolledToBottom() {
+    const chatHistory = document.getElementById('chat-history');
+    const threshold = 1; // Allow 1px difference due to rounding
+    return Math.abs(chatHistory.scrollHeight - chatHistory.clientHeight - chatHistory.scrollTop) <= threshold;
+}
+
+// Scroll to bottom if we were already at bottom
+function scrollToBottomIfNeeded() {
+    if (isScrolledToBottom) {
+        const chatHistory = document.getElementById('chat-history');
+        chatHistory.scrollTop = chatHistory.scrollHeight;
+    }
+}
+
 function addMessageToChat(type, message, html = false)
 {
     updateMessageBlock(type);
 
+    isScrolledToBottom = checkIfScrolledToBottom();
     const messageElement = document.createElement('div');
 
     switch(type)
@@ -103,7 +127,7 @@ function addMessageToChat(type, message, html = false)
 
     currentMessageDiv.appendChild(messageElement);
 
-    chatHistory.scrollTop = chatHistory.scrollHeight;
+    scrollToBottomIfNeeded();
 }
 
 function addAssistantMessageToChat(message, fileName, diff, changeCount) 
@@ -213,6 +237,7 @@ function updateStreamMessage(message, final, html = false)
     if(!streamMessage)
     {
         updateMessageBlock('assistant');
+        isScrolledToBottom = checkIfScrolledToBottom();
 
         streamMessage = document.createElement('div');
         streamMessage.className = 'message-assistant-stream';
@@ -223,6 +248,8 @@ function updateStreamMessage(message, final, html = false)
     { streamMessage.innerHTML = message; }
     else
     { streamMessage.textContent = message; }
+
+    scrollToBottomIfNeeded();
 
     if(final)
     {
