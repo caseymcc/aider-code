@@ -91,7 +91,7 @@ export class AiderInterface
 
     private handleAssistantStream(parsedData: any): void
     {
-        this.app.addAssistantStream(parsedData.value, parsedData.final);
+        this.app.addAssistantStream(parsedData.value, parsedData.pos, parsedData.final);
     }
 
     private handleVersion(parsedData: any): void

@@ -47,16 +47,16 @@ class AiderFileDecorationProvider implements vscode.FileDecorationProvider
                 if(existingFlags.write!==!isReadOnly||existingFlags.read!==true)
                 {
                     this.fileFlags.set(fullPath, { write: !isReadOnly, read: true });
-//                    vscode.commands.executeCommand('setContext', `aider-code.isAdded.${this.getContextKey(uri)}`, true);
-//                    vscode.commands.executeCommand('setContext', `aider-code.isAdded.${fullPath}`, true);
-//                    vscode.commands.executeCommand('setContext', `aider-code.isAddedReadOnly.${fullPath}`, isReadOnly);
+                    //                    vscode.commands.executeCommand('setContext', `aider-code.isAdded.${this.getContextKey(uri)}`, true);
+                    //                    vscode.commands.executeCommand('setContext', `aider-code.isAdded.${fullPath}`, true);
+                    //                    vscode.commands.executeCommand('setContext', `aider-code.isAddedReadOnly.${fullPath}`, isReadOnly);
                 }
-            } 
+            }
             else
             {
                 this.fileFlags.set(fullPath, { write: !isReadOnly, read: true });
-//                vscode.commands.executeCommand('setContext', `aider-code.isAdded.${fullPath}`, true);
-//                vscode.commands.executeCommand('setContext', `aider-code.isAddedReadOnly.${fullPath}`, isReadOnly);
+                //                vscode.commands.executeCommand('setContext', `aider-code.isAdded.${fullPath}`, true);
+                //                vscode.commands.executeCommand('setContext', `aider-code.isAddedReadOnly.${fullPath}`, isReadOnly);
             }
         });
 
@@ -68,8 +68,8 @@ class AiderFileDecorationProvider implements vscode.FileDecorationProvider
             {
                 const fullPath=path.join(workingDirectory, key);
 
-//                vscode.commands.executeCommand('setContext', `aider-code.isAdded.${fullPath}`, false);
-//                vscode.commands.executeCommand('setContext', `aider-code.isAddedReadOnly.${fullPath}`, false);
+                //                vscode.commands.executeCommand('setContext', `aider-code.isAdded.${fullPath}`, false);
+                //                vscode.commands.executeCommand('setContext', `aider-code.isAddedReadOnly.${fullPath}`, false);
                 this.fileFlags.delete(key);
             }
         });
@@ -89,18 +89,18 @@ class AiderFileDecorationProvider implements vscode.FileDecorationProvider
         return false;
     }
 
-//    public isAddedReadOnly(uri: vscode.Uri): boolean
-//    {
-//        console.log(`isAddedReadOnly: ${uri.fsPath}`);
-//
-//        const fileFlags=this.fileFlags.get(uri.fsPath);
-//
-//        if(fileFlags)
-//        {
-//            return !fileFlags.write&&fileFlags.read;
-//        }
-//        return false;
-//    }
+    //    public isAddedReadOnly(uri: vscode.Uri): boolean
+    //    {
+    //        console.log(`isAddedReadOnly: ${uri.fsPath}`);
+    //
+    //        const fileFlags=this.fileFlags.get(uri.fsPath);
+    //
+    //        if(fileFlags)
+    //        {
+    //            return !fileFlags.write&&fileFlags.read;
+    //        }
+    //        return false;
+    //    }
 
     provideFileDecoration(uri: vscode.Uri): vscode.FileDecoration|undefined
     {
@@ -155,6 +155,7 @@ export class AiderExtension
 
     private chatHistory: ChatMessage[]=[];
     private answeredPrompts: Set<string>=new Set();
+    private currentStreamMessage: string='';
 
     private workingDirectory: string='';
 
@@ -185,30 +186,56 @@ export class AiderExtension
         context.subscriptions.push(toggleDisposable);
 
         context.subscriptions.push(
-            vscode.commands.registerCommand('aider-code.isAdded', (uri: vscode.Uri) => {
+            vscode.commands.registerCommand('aider-code.isAdded', (uri: vscode.Uri) =>
+            {
                 console.log(`aider-code.isAdded: ${uri.fsPath}`);
                 return this.fileDecorationProvider.isAdded(uri);
             })
         );
-//         context.subscriptions.push(
-//            vscode.commands.registerCommand('_aider-code.isAddedReadOnly', (uri: vscode.Uri) => {
-//                return this.fileDecorationProvider.isAddedReadOnly(uri);
-//            })
-//        );
 
-        let addFile=vscode.commands.registerCommand('aider-code.explorer-context-menu.add', (uri: vscode.Uri) =>
+        let addFile=vscode.commands.registerCommand('aider-code.explorer-context-menu.add', (uri: vscode.Uri, allUris: vscode.Uri[]) => 
         {
-            this.aiderInterface.sendCommand('/add', uri.fsPath);
+            if(allUris)
+            {
+                allUris.forEach(uri =>
+                {
+                    this.aiderInterface.sendCommand('/add', uri.fsPath);
+                });
+            }
+            else if(uri)
+            {
+                this.aiderInterface.sendCommand('/add', uri.fsPath);
+            }
         });
 
-        let addReadOnlyFile=vscode.commands.registerCommand('aider-code.explorer-context-menu.addReadOnly', (uri: vscode.Uri) =>
+        let addReadOnlyFile=vscode.commands.registerCommand('aider-code.explorer-context-menu.addReadOnly', (uri: vscode.Uri, allUris: vscode.Uri[]) =>
         {
-            this.aiderInterface.sendCommand('/readonly', uri.fsPath);
+            if(allUris)
+            {
+                allUris.forEach(uri =>
+                {
+                    this.aiderInterface.sendCommand('/read-only', uri.fsPath);
+                });
+            }
+            else if(uri)
+            {
+                this.aiderInterface.sendCommand('/read-only', uri.fsPath);
+            }
         });
 
-        let removeFile=vscode.commands.registerCommand('aider-code.explorer-context-menu.remove', (uri: vscode.Uri) =>
+        let removeFile=vscode.commands.registerCommand('aider-code.explorer-context-menu.remove', (uri: vscode.Uri, allUris: vscode.Uri[]) =>
         {
-            this.aiderInterface.sendCommand('/drop', uri.fsPath);
+            if(allUris)
+                {
+                    allUris.forEach(uri =>
+                    {
+                        this.aiderInterface.sendCommand('/drop', uri.fsPath);
+                    });
+                }
+                else if(uri)
+                {
+                    this.aiderInterface.sendCommand('/drop', uri.fsPath);
+                }
         });
 
         context.subscriptions.push(addFile);
@@ -256,15 +283,25 @@ export class AiderExtension
         this.webview?.addMessageAssistant(message);
     }
 
-    public addAssistantStream(message: string, final: boolean)
+    public addAssistantStream(message: string, pos: number, final: boolean)
     {
-        Logger.log(`addAssistantStream: ${message} (final: ${final})`);
+        Logger.log(`addAssistantStream: ${message} pos: ${pos} (final: ${final})`);
 
+        if(pos===0)
+        {
+            this.currentStreamMessage=message;
+        }
+        else
+        {
+            this.currentStreamMessage+=message;
+        }
+
+        this.webview?.updateStreamMessage(this.currentStreamMessage, final);
         if(final)
         {
-            this.chatHistory.push({ type: 'assistant', message: message });
+            this.chatHistory.push({ type: 'assistant', message: this.currentStreamMessage });
+            this.currentStreamMessage='';
         }
-        this.webview?.updateStreamMessage(message, final);
     }
 
     public addUserMessage(message: string)

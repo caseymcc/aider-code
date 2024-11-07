@@ -67,17 +67,17 @@
       ],
       "explorer/context": [
         {
-          "when": "resourceScheme == file",
+          "when": "explorerResourceIsFolder == false",
           "command": "aider-code.explorer-context-menu.add",
           "group": "aider-code@1"
         },
         {
-          "when": "resourceScheme == file",
+          "when": "explorerResourceIsFolder == false",
           "command": "aider-code.explorer-context-menu.addReadOnly",
           "group": "aider-code@2"
         },
         {
-          "when": "resourceScheme == file",
+          "when": "explorerResourceIsFolder == false",
           "command": "aider-code.explorer-context-menu.remove",
           "group": "aider-code@3"
         }
